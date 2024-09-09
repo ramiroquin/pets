@@ -1,0 +1,53 @@
+<div style="display: flex; flex-wrap: wrap; gap: 1rem">
+  <p-card 
+  *ngFor="let pet of petList"
+  class="card"
+  header="{{ pet.nombre }}"
+  [style]="{ width: '400px', backgroundColor: backgroundCard }"
+  [ngStyle]="{ opacity: opacidad }"
+  >
+  <ng-template pTemplate="header">
+    <img *ngIf="isChecked" src="../../assets/card-img.jpg" alt="perro" />
+  </ng-template>
+
+  <p>Raza: {{ pet.raza }}</p>
+
+  <div style="display: flex; gap: 1rem; align-items: center">
+    <label for="mostrarMascota">Mostrar mascota</label>
+    <input
+    id="mostrarMascota"
+    type="checkbox"
+    (change)="OnCheckBoxChange($event)"
+    />
+  </div>
+
+  <p>Sexo: {{ pet.sexo }}</p>
+  <p>Edad: {{ pet.edad }}</p>
+  <p>Nacimiento: {{ pet.nacimiento }}</p>
+  <p>Tutor: {{ pet.tutor }}</p>
+
+  <div style="display: flex; gap: 1rem; align-items: center">
+    <label for="opacidadRange">Opacidad</label>
+    <input
+    id="opacidadRange"
+    type="range"
+    min="0"
+    max="1"
+    step="0.01"
+    [value]="opacidad"
+    (input)="cambiarOpacidad($event)"
+    />
+  </div>
+
+  <label for="">Color de tarjeta</label>
+  <input
+    type="color"
+    [value]="backgroundCard"
+    (input)="onChangeColor($event)"
+  />
+
+  <ng-template pTemplate="footer">
+    <p-button (click)="aumentarEdad(pet)">Aumentar edad</p-button>
+  </ng-template>
+  </p-card>
+</div>
